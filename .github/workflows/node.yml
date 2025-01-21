@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  libary_app_test:
+  api-wrapper-test:
     runs-on: ubuntu-latest
 
     steps:
