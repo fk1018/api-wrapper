@@ -7,7 +7,7 @@ export class ApiClient {
     this.baseUrl = baseUrl;
   }
 
-  request<T, B = {}>({
+  async request<T, B = {}>({
     endpoint,
     method,
     headers,
@@ -18,7 +18,7 @@ export class ApiClient {
     method: string;
     headers: HeadersInit;
     params?: Record<string, any>;
-    body?: Record<string, any>;
+    body?: unknown;
   } & B): Promise<T> {
     const url = createUrl({
       baseUrl: this.baseUrl,
@@ -27,15 +27,15 @@ export class ApiClient {
     });
     const requestInit: RequestInit = { method, headers };
     if (body) requestInit.body = JSON.stringify(body);
-    return fetch(url, requestInit).then((response) => {
-      if (response.ok) {
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
-          return response.json();
-        } else {
-          return response.text();
-        }
+    let response = await fetch(url, requestInit);
+    if (response.ok) {
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        return response.json() as T;
+      } else {
+        return response.text() as T;
       }
+    } else {
       console.log(`Error making request:\n\t${JSON.stringify(response)}`);
       throw new Error(
         JSON.stringify({
@@ -44,6 +44,6 @@ export class ApiClient {
           url: response.url,
         })
       );
-    });
+    }
   }
 }
