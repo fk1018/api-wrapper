@@ -7,7 +7,7 @@ export class ApiClient {
     this.baseUrl = baseUrl;
   }
 
-  request<T, B = {}>({
+  request<T>({
     endpoint,
     method,
     headers,
@@ -18,8 +18,8 @@ export class ApiClient {
     method: string;
     headers: HeadersInit;
     params?: Record<string, any>;
-    body?: Record<string, any>;
-  } & B): Promise<T> {
+    body?: unknown;
+  }): Promise<T> {
     const url = createUrl({
       baseUrl: this.baseUrl,
       endpoint,

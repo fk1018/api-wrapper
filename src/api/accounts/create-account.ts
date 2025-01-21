@@ -209,7 +209,7 @@ export interface CreateAccountBody {
 export function createAccount(options: CreateAccountOptions) {
   const { endpoint, method } = getApiRoute("ACCOUNTS", "CREATE_ACCOUNT");
   const createAccountApi = new ApiClient(BASE_URL);
-  return createAccountApi.request<OK, { body: CreateAccountBody }>({
+  return createAccountApi.request<OK>({
     endpoint,
     method,
     headers: options.headers,

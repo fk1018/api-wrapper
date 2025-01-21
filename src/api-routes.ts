@@ -1,20 +1,25 @@
 // src/api-routes.ts
-const GET = "get";
-const POST = "post";
-const DELETE = "delete";
+export enum HttpMethod {
+  GET = "get",
+  POST = "post",
+  DELETE = "delete",
+}
 const _API_ROUTES = {
   ACCOUNTS: {
-    LIST_ACCOUNTS: { endpoint: "/v1/accounts", method: GET },
-    CREATE_ACCOUNT: { endpoint: "/v1/accounts", method: POST },
-    DELETE_ACCOUNT: { endpoint: "/v1/accounts/:id", method: DELETE },
+    LIST_ACCOUNTS: { endpoint: "/v1/accounts", method: HttpMethod.GET },
+    CREATE_ACCOUNT: { endpoint: "/v1/accounts", method: HttpMethod.POST },
+    DELETE_ACCOUNT: { endpoint: "/v1/accounts/:id", method: HttpMethod.DELETE },
   },
   AXLE_CONFIGURATIONS: {
-    LIST_AXLE_CONFIGURATIONS: { endpoint: "/v1/axle_configs", method: GET },
+    LIST_AXLE_CONFIGURATIONS: {
+      endpoint: "/v1/axle_configs",
+      method: HttpMethod.GET,
+    },
   },
   AXLE_CONFIGURATION_TEMPLATES: {
     LIST_AXLE_CONFIGURATION_TEMPLATES: {
       endpoint: "/v1/axle_config_templates",
-      method: GET,
+      method: HttpMethod.GET,
     },
   },
 } as const;
