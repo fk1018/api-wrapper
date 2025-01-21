@@ -27,7 +27,7 @@ export class ApiClient {
     });
     const requestInit: RequestInit = { method, headers };
     if (body) requestInit.body = JSON.stringify(body);
-    let response = await fetch(url, requestInit);
+    const response = await fetch(url, requestInit);
     if (response.ok) {
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
